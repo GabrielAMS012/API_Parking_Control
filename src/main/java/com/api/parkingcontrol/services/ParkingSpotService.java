@@ -3,9 +3,14 @@ package com.api.parkingcontrol.services;
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Pageable;
 import javax.transaction.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ParkingSpotService {
@@ -21,18 +26,28 @@ public class ParkingSpotService {
         return parkingSpotRepository.save(parkingSpotModel);
     }
 
-    public ParkingSpotModel testSave() {
-        ParkingSpotModel parkingSpotModel2 = new ParkingSpotModel();
-
-        parkingSpotModel2.setParkingSpotNumber("203B");
-        parkingSpotModel2.setLicensePlateCar("RRS8563");
-        parkingSpotModel2.setBrandCar("toyota");
-        parkingSpotModel2.setModelCar("hylux");
-        parkingSpotModel2.setColorCar("white");
-        parkingSpotModel2.setResponsibleName("Carlos Daniel");
-        parkingSpotModel2.setApartment("203");
-        parkingSpotModel2.setBlock("B");
-
-        return parkingSpotModel2;
+    public boolean existsByLicensePlateCar(String licensePlateCar) {
+        return parkingSpotRepository.existsByLicensePlateCar(licensePlateCar);
     }
+
+    public boolean existsByParkingSpotNumber(String parkingSpotNumber) {
+        return parkingSpotRepository.existsByParkingSpotNumber((parkingSpotNumber));
+    }
+
+    public boolean existsByApartmentAndBlock(String apartment, String block){
+        return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
+    }
+
+    public Page<ParkingSpotModel> findAll(Pageable pageable) {
+        return parkingSpotRepository.findAll(pageable);
+    }
+
+    public Optional<ParkingSpotModel> findById(UUID id) {
+        return parkingSpotRepository.findById(id);
+    }
+
+    public void delete(ParkingSpotModel parkingSpotModel) {
+        parkingSpotRepository.delete(parkingSpotModel);
+    }
+
 }

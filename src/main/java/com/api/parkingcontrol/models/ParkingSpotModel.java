@@ -50,22 +50,6 @@ public class ParkingSpotModel implements Serializable {
         return brandCar;
     }
 
-    public ParkingSpotModel(UUID id, String parkingSpotNumber, String licensePlateCar, String brandCar, String modelCar, String colorCar, LocalDateTime registrationDate, String responsibleName, String apartment, String block) {
-        this.id = id;
-        this.parkingSpotNumber = parkingSpotNumber;
-        this.licensePlateCar = licensePlateCar;
-        this.brandCar = brandCar;
-        this.modelCar = modelCar;
-        this.colorCar = colorCar;
-        this.registrationDate = registrationDate;
-        this.responsibleName = responsibleName;
-        this.apartment = apartment;
-        this.block = block;
-    }
-
-    public ParkingSpotModel() {
-    }
-
     public void setBrandCar(String brandCar) {
         this.brandCar = brandCar;
     }
